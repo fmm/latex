@@ -15,7 +15,7 @@
 %% other students from Federal University of Pernambuco who contributed
 %% to the RiSE template development.
 
-\ProvidesClass{risethesis}[2008/05/06]
+\ProvidesClass{risethesis}[2012/11/17]
 %\input{aboutufpethesis.txt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -67,8 +67,15 @@
 \DeclareOption{doublespacing}{%
   \let\@linespacing=2}
 
+\DeclareOption{classic}{%
+  \let\@style=0}
+ 
+\DeclareOption{std}{%
+  \let\@style=1
+}
+
 % Default options
-\ExecuteOptions{pt,msc,print}
+\ExecuteOptions{pt,msc,classic,print} % why std? The font is awful!
 \ProcessOptions
 
 \LoadClass[12pt,a4paper]{book}
@@ -87,23 +94,23 @@
 \RequirePackage{url}
 \RequirePackage{colortbl}
 \RequirePackage{xspace}
-\RequirePackage[T1]{fontenc}
-\RequirePackage{mathptmx}
-\RequirePackage[scaled=0.92]{helvet}
-\RequirePackage{courier}
-\RequirePackage{appendix}
-\usepackage{microtype}
-\usepackage{setspace}
-
+\if\@style1
+  \RequirePackage[T1]{fontenc}
+  \RequirePackage{mathptmx}
+  \RequirePackage[scaled=0.92]{helvet}
+  \RequirePackage{courier}
+\fi
 \if\@scr0
   \RequirePackage{graphicx}
 \fi
-
 \if\@scr1
   \RequirePackage[dvips]{graphicx}
   \RequirePackage[dvips,usenames]{color}
   \RequirePackage[dvipdfm,colorlinks,backref]{hyperref}
 \fi
+\RequirePackage{appendix}
+\usepackage{microtype}
+\usepackage{setspace}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -172,7 +179,7 @@
   \gdef\@listacronymname{Acrônimos}
   \gdef\@colophontext{%
   \urlstyle{rm}%
-  Este volume foi tipografado em \LaTeX\ na classe \textsf{RiSEThesis}
+  Este volume foi tipografado em \LaTeX\ na classe \textsf{RiSEThesis(modified by fmm)}
   (\url{http://risetemplate.sourceforge.net}).
   \if\@scr1
   Para detalhes sobre este documento, clique \Acrobatmenu{GeneralInfo}{aqui}.
@@ -342,7 +349,7 @@
 
 \gdef\@presentationtext{%
 \if\@language0
-Proposta inicial apresentada ao Programa de
+Trabalho apresentado ao Programa de
 \@programpt\ do \if\@showdepartment1\@departmentpt\ \else\@institutept\ \fi
 da \@universitypt\ como requisito parcial para obtenção do
 grau de \@degree\ em \@majorfieldpt.
@@ -404,15 +411,15 @@ requirements for the degree of \@degree\ in \@majorfielden.
     \begin{center}
       {\Large {``\@title''}}\\
       \vskip\baselineskip
-     % {\large \@textby}
+      {\large \@textby}
       \vskip\baselineskip
       {\LARGE \textbf{\@author}}
       \vskip\baselineskip
-      {{\large Proposta de\@texttype}}\\
+      {{\large \@texttype}}\\
     \end{center}
   %\end{minipage}\\
   \vspace{1.4cm}
-  \includegraphics[width=1.5cm]{ufpelogo} \\
+  \includegraphics[width=1cm]{ufpelogo} \\
   %{\sf\large \@university
   %\if\@showinstitute1\\
   %\@institute\fi
@@ -429,8 +436,8 @@ requirements for the degree of \@degree\ in \@majorfielden.
   \else
     {\tiny \@departmenten\\}
   \fi
-  {\tiny \fontfamily{arial}\selectfont \href{mailto:secgrad@cin.ufpe.br}{secgrad@cin.ufpe.br}\\}
-  {\tiny \fontfamily{arial}\selectfont \href{http://www.cin.ufpe.br/~secgrad}{http://www.cin.ufpe.br/~secgrad}\\}
+  {\tiny \fontfamily{arial}\selectfont \href{mailto:posgraduacao@cin.ufpe.br}{posgraduacao@cin.ufpe.br}\\}
+  {\tiny \fontfamily{arial}\selectfont \href{http://www.cin.ufpe.br/~posgraduacao}{http://www.cin.ufpe.br/\texttt{\char`\~}posgraduacao}\\}
   \vskip\baselineskip
   \vskip\baselineskip
   \@address , \@date
@@ -485,7 +492,8 @@ requirements for the degree of \@degree\ in \@majorfielden.
 	\end{figure}
   \vskip 25mm
   \begin{center}
-  \Large\sf Proposta Trabalho de Graduação
+  \large \@author
+  \vskip\baselineskip
   \vskip\baselineskip
   {\Large\bfseries{``\@title''}}\\
   \vskip 28mm
@@ -497,8 +505,7 @@ requirements for the degree of \@degree\ in \@majorfielden.
     \flushright{
     	%\begin{center}
     	%\begin{tabular}{rl}
-    	{\quotefont\bfseries \@advisertitle:} \@adviser { (\href{mailto:fatc@cin.ufpe.br}{fatc@cin.ufpe.br})}\\
-		{\quotefont\bfseries Aluno:} \@author { (\href{mailto:fmm@cin.ufpe.br}{fmmm@cin.ufpe.br})}\\
+    	{\quotefont \@advisertitle:} \@adviser\\
     	\if\@showcoadviser1{\quotefont\@coadvisertitle:} \@coadviser\\\fi
     	%\end{tabular}
     	%\end{center}
@@ -638,7 +645,7 @@ requirements for the degree of \@degree\ in \@majorfielden.
  \RequirePackage{fancybox}
 % 
 % %% make the equation numbers have little ovals around them
- \def\tagform@#1{\maketag@@@{\cornersize{0.8}\ovalbox{\ignorespaces\sffamily{#1}\unskip\@@italiccorr}}}
+\def\tagform@#1{\maketag@@@{\cornersize{0.8}\ovalbox{\ignorespaces\sffamily{#1}\unskip\@@italiccorr}}}
 % 
 % %% Load up PS insertion package
  \RequirePackage{psboxit}
