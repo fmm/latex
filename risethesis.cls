@@ -497,8 +497,8 @@ requirements for the degree of \@degree\ in \@majorfielden.
     \flushright{
     	%\begin{center}
     	%\begin{tabular}{rl}
-    	{\quotefont\bfseries \@advisertitle:} \@adviser { (\href{mailto:nsr@cin.ufpe.br}{nsr@cin.ufpe.br})}\\
-		{\quotefont\bfseries Aluno:} \@author { (\href{mailto:tcs5@cin.ufpe.br}{tcs5@cin.ufpe.br})}\\
+    	{\quotefont\bfseries \@advisertitle:} \@adviser { (\href{mailto:fatc@cin.ufpe.br}{fatc@cin.ufpe.br})}\\
+		{\quotefont\bfseries Aluno:} \@author { (\href{mailto:fmm@cin.ufpe.br}{fmmm@cin.ufpe.br})}\\
     	\if\@showcoadviser1{\quotefont\@coadvisertitle:} \@coadviser\\\fi
     	%\end{tabular}
     	%\end{center}
